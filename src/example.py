@@ -42,6 +42,6 @@ class Ui_MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = Ui_MainWindow("word_list.txt")
+    window = Ui_MainWindow("example_word_list.txt")
     window.show()
     sys.exit(app.exec_())
