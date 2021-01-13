@@ -16,4 +16,4 @@ $ pip install -r requirements.txt
 
 An example of usage is available in `example.py`
 
-![Demo](https://i.imgur.com/VSo625R.gif)
+<img src="https://i.imgur.com/VSo625R.gif" width="500" height="500" alt="Demo"/>
