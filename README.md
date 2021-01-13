@@ -16,4 +16,4 @@ $ pip install -r requirements.txt
 
 An example of usage is available in `example.py`
 
-![](https://i.imgur.com/VSo625R.gifv)
+![Demo](https://i.imgur.com/VSo625R.gifv)
