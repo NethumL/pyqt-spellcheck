@@ -1,4 +1,4 @@
-from typing import Callable, List, Set
+from typing import Callable
 
 from enchant import DictWithPWL
 from PyQt5.QtCore import QTemporaryFile
@@ -6,7 +6,7 @@ from PyQt5.QtCore import QTemporaryFile
 
 class SpellCheckWrapper:
     def __init__(
-        self, personal_word_list: List[str], addToDictionary: Callable[[str], None]
+        self, personal_word_list: list[str], addToDictionary: Callable[[str], None]
     ):
         # Creating temporary file
         self.file = QTemporaryFile()
@@ -25,7 +25,7 @@ class SpellCheckWrapper:
         for word in self.word_list:
             self.dictionary.add(word)
 
-    def suggestions(self, word: str) -> List[str]:
+    def suggestions(self, word: str) -> list[str]:
         return self.dictionary.suggest(word)
 
     def correction(self, word: str) -> str:
@@ -42,5 +42,5 @@ class SpellCheckWrapper:
     def check(self, word: str) -> bool:
         return self.dictionary.check(word)
 
-    def getNewWords(self) -> Set[str]:
+    def getNewWords(self) -> set[str]:
         return self.word_list

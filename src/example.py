@@ -1,5 +1,4 @@
 import sys
-from typing import List
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
 
@@ -30,7 +29,7 @@ class Ui_MainWindow(QMainWindow):
         self.textEdit2 = SpellTextEdit(self.speller, self.centralWidget)
         self.layout.addWidget(self.textEdit2)
 
-    def getWords(self) -> List[str]:
+    def getWords(self) -> list[str]:
         with open(self.word_list_path, "r") as f:
             word_list = [line.strip() for line in f]
         return word_list

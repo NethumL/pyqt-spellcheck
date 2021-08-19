@@ -1,5 +1,3 @@
-from typing import List
-
 from PyQt5.QtCore import QEvent, Qt, pyqtSlot
 from PyQt5.QtGui import QContextMenuEvent, QMouseEvent, QTextCursor
 from PyQt5.QtWidgets import QMenu, QTextEdit
@@ -50,7 +48,7 @@ class SpellTextEdit(QTextEdit):
 
         self.contextMenu.exec_(event.globalPos())
 
-    def createSuggestionsMenu(self, suggestions: List[str]):
+    def createSuggestionsMenu(self, suggestions: list[str]):
         suggestionsMenu = QMenu("Change to", self)
         for word in suggestions:
             action = SpecialAction(word, self.contextMenu)
