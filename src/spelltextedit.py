@@ -8,11 +8,19 @@ from spellcheckwrapper import SpellCheckWrapper
 
 
 class SpellTextEdit(QTextEdit):
-    def __init__(self, speller: SpellCheckWrapper, *args):
-        super().__init__(*args)
+    def __init__(self, *args):
+        if args and type(args[0]) == SpellCheckWrapper:
+            super().__init__(*args[1:])
+            self.speller = args[0]
+        else:
+            super().__init__(*args)
 
-        self.speller = speller
         self.highlighter = SpellCheckHighlighter(self.document())
+        if hasattr(self, "speller"):
+            self.highlighter.setSpeller(self.speller)
+
+    def setSpeller(self, speller):
+        self.speller = speller
         self.highlighter.setSpeller(self.speller)
 
     def mousePressEvent(self, event: QMouseEvent) -> None:
