@@ -1,15 +1,19 @@
+from __future__ import annotations
+
 from PyQt5.QtCore import QEvent, Qt, pyqtSlot
 from PyQt5.QtGui import QContextMenuEvent, QMouseEvent, QTextCursor
 from PyQt5.QtWidgets import QMenu, QTextEdit
 
-from correction_action import SpecialAction
-from highlighter import SpellCheckHighlighter
-from spellcheckwrapper import SpellCheckWrapper
+from pyqt_spellcheck.correction_action import CorrectionAction
+from pyqt_spellcheck.highlighter import SpellCheckHighlighter
+from pyqt_spellcheck.spellcheckwrapper import SpellCheckWrapper
 
 
 class SpellTextEdit(QTextEdit):
+    """QTextEdit widget with spell checking."""
+
     def __init__(self, *args):
-        if args and type(args[0]) == SpellCheckWrapper:
+        if args and isinstance(args[0], SpellCheckWrapper):
             super().__init__(*args[1:])
             self.speller = args[0]
         else:
@@ -19,23 +23,33 @@ class SpellTextEdit(QTextEdit):
         if hasattr(self, "speller"):
             self.highlighter.setSpeller(self.speller)
 
+        self.contextMenu: QMenu | None = None
+
     def setSpeller(self, speller):
         self.speller = speller
         self.highlighter.setSpeller(self.speller)
 
-    def mousePressEvent(self, event: QMouseEvent) -> None:
-        if event.button() == Qt.RightButton:
+    def mousePressEvent(self, event: QMouseEvent | None) -> None:
+        if event is None:
+            return
+
+        if event.button() == Qt.MouseButton.RightButton:
             event = QMouseEvent(
-                QEvent.MouseButtonPress,
+                QEvent.Type.MouseButtonPress,
                 event.pos(),
-                Qt.LeftButton,
-                Qt.LeftButton,
-                Qt.NoModifier,
+                Qt.MouseButton.LeftButton,
+                Qt.MouseButton.LeftButton,
+                Qt.KeyboardModifier.NoModifier,
             )
         super().mousePressEvent(event)
 
-    def contextMenuEvent(self, event: QContextMenuEvent) -> None:
+    def contextMenuEvent(self, event: QContextMenuEvent | None) -> None:
+        if event is None:
+            return
+
         self.contextMenu = self.createStandardContextMenu(event.pos())
+        if self.contextMenu is None:
+            return
 
         textCursor = self.textCursor()
         textCursor.select(QTextCursor.WordUnderCursor)
@@ -48,8 +62,9 @@ class SpellTextEdit(QTextEdit):
                 self.contextMenu.addSeparator()
                 self.contextMenu.addMenu(self.createSuggestionsMenu(suggestions))
             if not self.speller.check(wordToCheck):
-                addToDictionary_action = SpecialAction(
-                    "Add to dictionary", self.contextMenu
+                addToDictionary_action = CorrectionAction(
+                    "Add to dictionary",
+                    self.contextMenu,
                 )
                 addToDictionary_action.triggered.connect(self.addToDictionary)
                 self.contextMenu.addAction(addToDictionary_action)
@@ -59,7 +74,7 @@ class SpellTextEdit(QTextEdit):
     def createSuggestionsMenu(self, suggestions: list[str]):
         suggestionsMenu = QMenu("Change to", self)
         for word in suggestions:
-            action = SpecialAction(word, self.contextMenu)
+            action = CorrectionAction(word, self.contextMenu)
             action.actionTriggered.connect(self.correctWord)
             suggestionsMenu.addAction(action)
 
