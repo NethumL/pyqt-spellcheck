@@ -23,19 +23,27 @@ class SpellTextEdit(QTextEdit):
         self.speller = speller
         self.highlighter.setSpeller(self.speller)
 
-    def mousePressEvent(self, event: QMouseEvent) -> None:
-        if event.button() == Qt.RightButton:
+    def mousePressEvent(self, event: QMouseEvent | None) -> None:
+        if event is None:
+            return
+
+        if event.button() == Qt.MouseButton.RightButton:
             event = QMouseEvent(
-                QEvent.MouseButtonPress,
+                QEvent.Type.MouseButtonPress,
                 event.pos(),
-                Qt.LeftButton,
-                Qt.LeftButton,
-                Qt.NoModifier,
+                Qt.MouseButton.LeftButton,
+                Qt.MouseButton.LeftButton,
+                Qt.KeyboardModifier.NoModifier,
             )
         super().mousePressEvent(event)
 
-    def contextMenuEvent(self, event: QContextMenuEvent) -> None:
+    def contextMenuEvent(self, event: QContextMenuEvent | None) -> None:
+        if event is None:
+            return
+
         self.contextMenu = self.createStandardContextMenu(event.pos())
+        if self.contextMenu is None:
+            return
 
         textCursor = self.textCursor()
         textCursor.select(QTextCursor.WordUnderCursor)

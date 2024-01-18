@@ -9,13 +9,15 @@ from pyqt_spellcheck.spellcheckwrapper import SpellCheckWrapper
 class SpellCheckHighlighter(QSyntaxHighlighter):
     wordRegEx = re.compile(r"\b([A-Za-z]{2,})\b")
 
-    def highlightBlock(self, text: str) -> None:
+    def highlightBlock(self, text: str | None) -> None:
         if not hasattr(self, "speller"):
+            return
+        if text is None:
             return
 
         self.misspelledFormat = QTextCharFormat()
         self.misspelledFormat.setUnderlineStyle(QTextCharFormat.SpellCheckUnderline)
-        self.misspelledFormat.setUnderlineColor(Qt.red)
+        self.misspelledFormat.setUnderlineColor(Qt.GlobalColor.red)
 
         for word_object in self.wordRegEx.finditer(text):
             if not self.speller.check(word_object.group()):
