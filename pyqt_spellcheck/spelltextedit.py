@@ -2,9 +2,9 @@ from PyQt5.QtCore import QEvent, Qt, pyqtSlot
 from PyQt5.QtGui import QContextMenuEvent, QMouseEvent, QTextCursor
 from PyQt5.QtWidgets import QMenu, QTextEdit
 
-from correction_action import SpecialAction
-from highlighter import SpellCheckHighlighter
-from spellcheckwrapper import SpellCheckWrapper
+from pyqt_spellcheck.correction_action import SpecialAction
+from pyqt_spellcheck.highlighter import SpellCheckHighlighter
+from pyqt_spellcheck.spellcheckwrapper import SpellCheckWrapper
 
 
 class SpellTextEdit(QTextEdit):

@@ -3,7 +3,7 @@ import re
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QSyntaxHighlighter, QTextCharFormat
 
-from spellcheckwrapper import SpellCheckWrapper
+from pyqt_spellcheck.spellcheckwrapper import SpellCheckWrapper
 
 
 class SpellCheckHighlighter(QSyntaxHighlighter):

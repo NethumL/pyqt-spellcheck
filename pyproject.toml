@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "pyqt-spellcheck"
+version = "0.1.0"
+description = "Spellchecking QTextEdit widget"
+authors = ["Nethum Lamahewage"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pyenchant = "^3.2.2"
+pyqt5 = "^5.15.10"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.12.1"
+mypy = "^1.8.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+ignore_missing_imports = true

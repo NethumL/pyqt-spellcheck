@@ -2,8 +2,8 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
 
-from spellcheckwrapper import SpellCheckWrapper
-from spelltextedit import SpellTextEdit
+from pyqt_spellcheck.spellcheckwrapper import SpellCheckWrapper
+from pyqt_spellcheck.spelltextedit import SpellTextEdit
 
 
 class Ui_MainWindow(QMainWindow):
