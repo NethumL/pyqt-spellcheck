@@ -5,6 +5,8 @@ from PyQt5.QtCore import QTemporaryFile
 
 
 class SpellCheckWrapper:
+    """Wrapper for enchant spell checking library"""
+
     def __init__(
         self, personal_word_list: list[str], addToDictionary: Callable[[str], None]
     ):

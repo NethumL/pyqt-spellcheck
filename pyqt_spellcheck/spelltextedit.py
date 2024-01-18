@@ -2,14 +2,16 @@ from PyQt5.QtCore import QEvent, Qt, pyqtSlot
 from PyQt5.QtGui import QContextMenuEvent, QMouseEvent, QTextCursor
 from PyQt5.QtWidgets import QMenu, QTextEdit
 
-from pyqt_spellcheck.correction_action import SpecialAction
+from pyqt_spellcheck.correction_action import CorrectionAction
 from pyqt_spellcheck.highlighter import SpellCheckHighlighter
 from pyqt_spellcheck.spellcheckwrapper import SpellCheckWrapper
 
 
 class SpellTextEdit(QTextEdit):
+    """QTextEdit widget with spell checking"""
+
     def __init__(self, *args):
-        if args and type(args[0]) == SpellCheckWrapper:
+        if args and isinstance(args[0], SpellCheckWrapper):
             super().__init__(*args[1:])
             self.speller = args[0]
         else:
@@ -18,6 +20,8 @@ class SpellTextEdit(QTextEdit):
         self.highlighter = SpellCheckHighlighter(self.document())
         if hasattr(self, "speller"):
             self.highlighter.setSpeller(self.speller)
+
+        self.contextMenu: QMenu | None = None
 
     def setSpeller(self, speller):
         self.speller = speller
@@ -56,7 +60,7 @@ class SpellTextEdit(QTextEdit):
                 self.contextMenu.addSeparator()
                 self.contextMenu.addMenu(self.createSuggestionsMenu(suggestions))
             if not self.speller.check(wordToCheck):
-                addToDictionary_action = SpecialAction(
+                addToDictionary_action = CorrectionAction(
                     "Add to dictionary", self.contextMenu
                 )
                 addToDictionary_action.triggered.connect(self.addToDictionary)
@@ -67,7 +71,7 @@ class SpellTextEdit(QTextEdit):
     def createSuggestionsMenu(self, suggestions: list[str]):
         suggestionsMenu = QMenu("Change to", self)
         for word in suggestions:
-            action = SpecialAction(word, self.contextMenu)
+            action = CorrectionAction(word, self.contextMenu)
             action.actionTriggered.connect(self.correctWord)
             suggestionsMenu.addAction(action)
 

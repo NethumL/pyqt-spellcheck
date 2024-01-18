@@ -14,10 +14,21 @@ pyqt5 = "^5.15.10"
 [tool.poetry.group.dev.dependencies]
 black = "^23.12.1"
 mypy = "^1.8.0"
+pylint = "^3.0.3"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.pylint.main]
+disable = [
+    "invalid-name",
+    "no-name-in-module",
+    "too-few-public-methods",
+    "missing-function-docstring",
+    "missing-module-docstring",
+]
+
 [tool.mypy]
 ignore_missing_imports = true
+check_untyped_defs = true
