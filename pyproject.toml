@@ -6,7 +6,7 @@ authors = ["Nethum Lamahewage"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.9"
 pyenchant = "^3.2.2"
 pyqt5 = "^5.15.10"
 
@@ -21,7 +21,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
-target-version = "py311"
+target-version = "py39"
 
 [tool.ruff.lint]
 select = ["ALL"]

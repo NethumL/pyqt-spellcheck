@@ -1,9 +1,13 @@
+from __future__ import annotations
+
 import re
+from typing import TYPE_CHECKING
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QSyntaxHighlighter, QTextCharFormat
 
-from pyqt_spellcheck.spellcheckwrapper import SpellCheckWrapper
+if TYPE_CHECKING:
+    from pyqt_spellcheck.spellcheckwrapper import SpellCheckWrapper
 
 
 class SpellCheckHighlighter(QSyntaxHighlighter):
