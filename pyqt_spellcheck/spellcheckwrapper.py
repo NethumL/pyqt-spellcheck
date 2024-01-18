@@ -1,14 +1,16 @@
-from typing import Callable
+from collections.abc import Callable
 
 from enchant import DictWithPWL
 from PyQt5.QtCore import QTemporaryFile
 
 
 class SpellCheckWrapper:
-    """Wrapper for enchant spell checking library"""
+    """Wrapper for enchant spell checking library."""
 
     def __init__(
-        self, personal_word_list: list[str], addToDictionary: Callable[[str], None]
+        self,
+        personal_word_list: list[str],
+        addToDictionary: Callable[[str], None],
     ):
         # Creating temporary file
         self.file = QTemporaryFile()

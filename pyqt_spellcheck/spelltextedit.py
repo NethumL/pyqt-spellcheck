@@ -8,7 +8,7 @@ from pyqt_spellcheck.spellcheckwrapper import SpellCheckWrapper
 
 
 class SpellTextEdit(QTextEdit):
-    """QTextEdit widget with spell checking"""
+    """QTextEdit widget with spell checking."""
 
     def __init__(self, *args):
         if args and isinstance(args[0], SpellCheckWrapper):
@@ -61,7 +61,8 @@ class SpellTextEdit(QTextEdit):
                 self.contextMenu.addMenu(self.createSuggestionsMenu(suggestions))
             if not self.speller.check(wordToCheck):
                 addToDictionary_action = CorrectionAction(
-                    "Add to dictionary", self.contextMenu
+                    "Add to dictionary",
+                    self.contextMenu,
                 )
                 addToDictionary_action.triggered.connect(self.addToDictionary)
                 self.contextMenu.addAction(addToDictionary_action)

@@ -7,7 +7,7 @@ from pyqt_spellcheck.spellcheckwrapper import SpellCheckWrapper
 
 
 class SpellCheckHighlighter(QSyntaxHighlighter):
-    """Highlighter for spell checking in Qt"""
+    """Highlighter for spell checking in Qt."""
 
     wordRegEx = re.compile(r"\b([A-Za-z]{2,})\b")
 

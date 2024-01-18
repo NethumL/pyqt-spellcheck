@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QAction
 
 
 class CorrectionAction(QAction):
-    """Custom QAction for correcting spelling"""
+    """Custom QAction for correcting spelling."""
 
     actionTriggered = pyqtSignal(str)
 
