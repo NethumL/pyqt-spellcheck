@@ -1,9 +1,13 @@
 [tool.poetry]
 name = "pyqt-spellcheck"
-version = "0.1.1"
+version = "0.1.2"
 description = "Spellchecking QTextEdit widget"
+license = "MIT"
 authors = ["Nethum Lamahewage"]
 readme = "README.md"
+repository = "https://github.com/NethumL/pyqt-spellcheck"
+keywords = ["pyqt5", "spellcheck"]
+exclude = ["examples"]
 
 [tool.poetry.dependencies]
 python = ">=3.9"
