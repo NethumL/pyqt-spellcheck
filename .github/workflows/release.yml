@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release:
+    name: Publish to PyPI
+    runs-on: macos-latest
+    environment: release
+    permissions:
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.9
+      - name: Set up poetry
+        run: |
+          python3 -m pip install --user pipx
+          python3 -m pipx ensurepath
+          pipx install poetry
+          poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
+      - name: Install dependencies
+        run: poetry install
+      - name: Build
+        run: poetry build
+      - name: Publish package
+        run: poetry publish

@@ -6,10 +6,10 @@
 
 - Install [enchant](https://github.com/AbiWord/enchant)
 
-- Get the required python packages
+- Install from PyPI
 
 ```shell
-$ pip install -r requirements.txt
+$ pip install pyqt-spellcheck
 ```
 
 ### Example
