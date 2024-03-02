@@ -4,6 +4,7 @@ from pathlib import Path
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
 
 from pyqt_spellcheck.spellcheckwrapper import SpellCheckWrapper
+from pyqt_spellcheck.spelllineedit import SpellLineEdit
 from pyqt_spellcheck.spelltextedit import SpellTextEdit
 
 
@@ -24,11 +25,11 @@ class Ui_MainWindow(QMainWindow):
         self.layout = QVBoxLayout(self.centralWidget)
         self.centralWidget.setLayout(self.layout)
 
-        self.textEdit1 = SpellTextEdit(self.speller, self.centralWidget)
-        self.layout.addWidget(self.textEdit1)
+        self.textEdit = SpellTextEdit(self.speller, self.centralWidget)
+        self.layout.addWidget(self.textEdit)
 
-        self.textEdit2 = SpellTextEdit(self.speller, self.centralWidget)
-        self.layout.addWidget(self.textEdit2)
+        self.lineEdit = SpellLineEdit(self.speller, self.centralWidget)
+        self.layout.addWidget(self.lineEdit)
 
     def getWords(self) -> list[str]:
         with Path(self.word_list_path).open() as f:
