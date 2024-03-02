@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyqt-spellcheck"
-version = "0.1.2"
+version = "0.2.0"
 description = "Spellchecking QTextEdit widget"
 license = "MIT"
 authors = ["Nethum Lamahewage"]
