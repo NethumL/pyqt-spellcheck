@@ -50,6 +50,9 @@ ignore = [
 
     # Annotations
     "ANN",
+
+    # unittest
+    "PT009",
 ]
 
 [tool.mypy]
