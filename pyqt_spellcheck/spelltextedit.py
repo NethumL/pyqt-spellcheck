@@ -25,7 +25,7 @@ class SpellTextEdit(QTextEdit):
 
         self.contextMenu: QMenu | None = None
 
-    def setSpeller(self, speller):
+    def setSpeller(self, speller: SpellCheckWrapper):
         self.speller = speller
         self.highlighter.setSpeller(self.speller)
 
@@ -55,12 +55,14 @@ class SpellTextEdit(QTextEdit):
         textCursor.select(QTextCursor.WordUnderCursor)
         self.setTextCursor(textCursor)
         wordToCheck = textCursor.selectedText()
+
         if wordToCheck != "":
             suggestions = self.speller.suggestions(wordToCheck)
 
             if len(suggestions) > 0:
                 self.contextMenu.addSeparator()
                 self.contextMenu.addMenu(self.createSuggestionsMenu(suggestions))
+
             if not self.speller.check(wordToCheck):
                 addToDictionary_action = CorrectionAction(
                     "Add to dictionary",
@@ -82,6 +84,7 @@ class SpellTextEdit(QTextEdit):
 
     @pyqtSlot(str)
     def correctWord(self, word: str):
+        """Replace the currently selected word with the given word."""
         textCursor = self.textCursor()
         textCursor.beginEditBlock()
         textCursor.removeSelectedText()

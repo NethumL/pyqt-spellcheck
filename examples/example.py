@@ -1,4 +1,5 @@
 import sys
+from pathlib import Path
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
 
@@ -30,12 +31,11 @@ class Ui_MainWindow(QMainWindow):
         self.layout.addWidget(self.textEdit2)
 
     def getWords(self) -> list[str]:
-        with open(self.word_list_path, "r") as f:
-            word_list = [line.strip() for line in f]
-        return word_list
+        with Path(self.word_list_path).open() as f:
+            return [line.strip() for line in f]
 
     def addToDictionary(self, new_word: str):
-        with open(self.word_list_path, "a") as f:
+        with Path(self.word_list_path).open("a") as f:
             f.write("\n" + new_word)
 
 
