@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  lint:
+  ci:
     strategy:
       fail-fast: false
       matrix:
