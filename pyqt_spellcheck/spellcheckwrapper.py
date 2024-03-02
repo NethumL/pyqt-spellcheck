@@ -11,14 +11,12 @@ class SpellCheckWrapper:
         self,
         personal_word_list: list[str],
         addToDictionary: Callable[[str], None],
+        language: str = "en_US",
     ):
         # Creating temporary file
         self.file = QTemporaryFile()
         self.file.open()
-        self.dictionary = DictWithPWL(
-            "en_US",
-            self.file.fileName(),
-        )
+        self.dictionary = DictWithPWL(language, self.file.fileName())
 
         self.addToDictionary = addToDictionary
 
