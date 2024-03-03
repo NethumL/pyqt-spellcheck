@@ -16,7 +16,6 @@ pyqt5 = "^5.15.10"
 
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.12.1"
 mypy = "^1.8.0"
 ruff = "^0.1.13"
 
@@ -53,6 +52,10 @@ ignore = [
 
     # unittest
     "PT009",
+
+    # Formatter
+    "COM812",
+    "ISC001",
 ]
 
 [tool.mypy]
